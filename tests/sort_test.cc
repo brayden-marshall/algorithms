@@ -43,6 +43,9 @@ TEMPLATE_TEST_CASE("Testing Sorting Functions", "[sorting][vector]", int) {
     functions.push_back(Sorter<TestType> {"insertion", insertion_sort<Iterator<TestType>>});
     functions.push_back(Sorter<TestType> {"selection", selection_sort<Iterator<TestType>>});
     functions.push_back(Sorter<TestType> {"bubble", bubble_sort<Iterator<TestType>>});
+    functions.push_back(Sorter<TestType> {"comb", comb_sort<Iterator<TestType>>});
+    functions.push_back(Sorter<TestType> {"gnome", gnome_sort<Iterator<TestType>>});
+    functions.push_back(Sorter<TestType> {"cocktail", cocktail_sort<Iterator<TestType>>});
     functions.push_back(Sorter<TestType> {"quick", quick_sort<Iterator<TestType>>});
     functions.push_back(Sorter<TestType> {"merge", merge_sort<Iterator<TestType>>});
 

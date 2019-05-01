@@ -2,7 +2,6 @@
 #define COMMON_H
 
 #include <vector>
-#include <cstdlib>
 #include <iostream>
 
 template <typename T>
@@ -20,7 +19,7 @@ void print_vector(const std::vector<T>& vec) {
 
 template <typename T>
 bool vector_is_sorted_asc(const std::vector<T>& vec) {
-    for (int i = 1; i < vec.size(); i++) {
+    for (long unsigned int i = 1; i < vec.size(); i++) {
         if (vec[i-1] > vec[i]) {
             return false;
         }
@@ -29,9 +28,6 @@ bool vector_is_sorted_asc(const std::vector<T>& vec) {
 }
 
 // assumes that srand() has already been called
-int get_random_int(int min, int max) {
-    static const double fraction = 1.0 / (static_cast<double>(RAND_MAX) + 1.0);
-    return static_cast<int>(rand() * fraction * (max - min + 1) + min);
-}
+int get_random_int(int min, int max);
 
 #endif
