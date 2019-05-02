@@ -4,6 +4,9 @@
 #include <vector>
 
 std::vector<long long int>
-eratosthenes(long long int n);
+eratosthenes(long long int);
+
+std::vector<long long int>
+sundaram(long long int);
 
 #endif
