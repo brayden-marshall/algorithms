@@ -8,15 +8,14 @@
  *     - insertion
  *     - selection
  *     - bubble
- *
- * These algorithms are included for completeness and benchmarking purposes,
- * not to be used in real applications (without extremely good reason)
+ *     - cocktail
+ *     - comb
+ *     - gnome
  */
 
 // Insertion sort
 template <typename Iter>
 void insertion_sort(Iter first, Iter last) {
-    // iterate through every element
     for (Iter i = first; i != last; i++) {
         for (Iter j = i; *j < *(j-1); j--) {
             std::iter_swap(j, j-1);
@@ -28,7 +27,13 @@ void insertion_sort(Iter first, Iter last) {
 template <typename Iter>
 void selection_sort(Iter first, Iter last) {
     for (Iter i = first; i != last; i++) {
-        std::iter_swap(i, std::min_element(i, last));
+        Iter min = i;
+        for (Iter j = i; j != last; j++) {
+            if (*j < *min) {
+                min = j;
+            }
+        }
+        std::iter_swap(i, min);
     }
 }
 
@@ -119,6 +124,34 @@ void gnome_sort(Iter first, Iter last) {
         } else {
             i++;
         }
+    }
+}
+
+// Odd-even sort
+template <typename Iter>
+void odd_even_sort(Iter first, Iter last) {
+
+    if (std::distance(first, last) <= 1) {
+        return;
+    }
+
+    bool sorted = false;
+    while (!sorted) {
+        sorted = true;
+        for (Iter i = first+1; i < last-1; i += 2) {
+            if (*i > *(i+1)) {
+                std::iter_swap(i, i+1);
+                sorted = false;
+            }
+        }
+
+        for (Iter i = first; i < last; i += 2) {
+            if (*i > *(i+1)) {
+                std::iter_swap(i, i+1);
+                sorted = false;
+            }
+        }
+
     }
 }
 
