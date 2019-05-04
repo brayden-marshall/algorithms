@@ -11,9 +11,6 @@ compile_prefix = g++ -Wall -Wpedantic -o bin/test bin/test_driver.o
 test : bin/test
 	./bin/test
 
-test-memory: bin/test
-	valgrind --leak-check=yes ./bin/test
-
 bin/test: bin/test_driver.o $(sources) $(headers)
 	$(compile_prefix) $(sources)
 
