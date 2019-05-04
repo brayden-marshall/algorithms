@@ -1,9 +1,7 @@
 #include "sieve.h"
 
 #include <vector>
-#include <unordered_set>
 #include <stdexcept>
-#include <iostream>
 
 std::vector<long long int> sundaram(long long int n) {
     if (n <= 1) {

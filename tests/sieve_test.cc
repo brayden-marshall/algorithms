@@ -13,7 +13,7 @@ TEST_CASE("Testing prime sieves", "[sieve]") {
 
     std::vector<Sieve> sieves {
         Sieve {"eratosthenes", eratosthenes},
-        Sieve {"sundaram", sundaram},
+        Sieve {"sundaram", sundaram}
     };
 
     for (auto sieve : sieves) {
