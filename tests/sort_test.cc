@@ -100,9 +100,9 @@ TEMPLATE_TEST_CASE("Testing Sorting Functions", "[sorting][vector]", int) {
                 CHECK(vec == expected);
             }
 
-            SECTION("Sorting a list with 30 random elements") {
+            SECTION("Sorting a list with 1000 random elements") {
                 std::vector<TestType> vec;
-                for (int i = 0; i < 30; i++) {
+                for (int i = 0; i < 1000; i++) {
                     int r = get_random_int(0, 100);
                     vec.push_back(r);
                 }

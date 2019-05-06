@@ -130,7 +130,7 @@ void odd_even_sort(std::vector<T>& vec) {
             }
         }
 
-        for (uint i = 0; i < vec.size(); i+= 2) {
+        for (uint i = 0; i < vec.size()-1; i+= 2) {
             if (vec[i] > vec[i+1]) {
                 std::swap(vec[i], vec[i+1]);
                 sorted = false;

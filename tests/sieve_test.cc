@@ -1,5 +1,4 @@
 #include "catch.h"
-#include "common.h"
 #include "../sieves/sieve.h"
 
 typedef std::vector<long long int> ReturnVector;
