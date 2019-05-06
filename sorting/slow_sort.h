@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <algorithm>
-#include <iostream>
 
 typedef unsigned int uint;
 

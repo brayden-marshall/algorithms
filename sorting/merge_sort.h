@@ -2,8 +2,6 @@
 #define MERGE_SORT_H
 
 #include <vector>
-#include <iostream>
-#include "../tests/common.h"
 
 namespace {
     template <typename T>

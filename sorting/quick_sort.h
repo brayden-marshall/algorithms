@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <algorithm>
-#include <iostream>
 
 namespace {
     template <typename T>
