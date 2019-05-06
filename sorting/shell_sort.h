@@ -29,11 +29,6 @@ template <typename T>
 void shell_sort(std::vector<T>& vec) {
     std::vector<uint> gaps = sedgewick_gaps(vec.size());
 
-    for (auto val : gaps) {
-        std::cout << val << ", ";
-    }
-    std::cout << std::endl;
-
     for (auto gap : gaps) {
         for (uint i = gap; i < vec.size(); i++) {
             uint j = i;

@@ -4,7 +4,7 @@
 #include <vector>
 #include <algorithm>
 
-namespace {
+namespace detail {
     template <typename T>
     T smart_pivot(std::vector<T>& vec, int low, int hi) {
         int mid = (low + hi) / 2;
@@ -59,7 +59,7 @@ namespace {
 
 template <typename T>
 void quick_sort(std::vector<T>& vec) {
-    _quick_sort(vec, 0, vec.size()-1);
+    detail::_quick_sort(vec, 0, vec.size()-1);
 }
 
 #endif

@@ -4,6 +4,7 @@
 #include "../sorting/quick_sort.h"
 #include "../sorting/merge_sort.h"
 #include "../sorting/shell_sort.h"
+#include "../sorting/heap_sort.h"
 
 #include <vector>
 #include <cstdlib> // for rand() and srand()
@@ -37,6 +38,7 @@ TEMPLATE_TEST_CASE("Testing Sorting Functions", "[sorting][vector]", int) {
     functions.push_back(Sorter<TestType> {"odd_even", odd_even_sort<TestType>});
     functions.push_back(Sorter<TestType> {"quick", quick_sort<TestType>});
     functions.push_back(Sorter<TestType> {"merge", merge_sort<TestType>});
+    functions.push_back(Sorter<TestType> {"heap", heap_sort<TestType>});
 
     for (auto func : functions) {
         SECTION("Testing " + func.name + " sort function") {
