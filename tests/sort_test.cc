@@ -28,6 +28,7 @@ TEMPLATE_TEST_CASE("Testing Sorting Functions", "[sorting][vector]", int) {
 
     std::vector<Sorter<TestType>> functions;
     functions.push_back(Sorter<TestType> {"insertion", insertion_sort<TestType>});
+    functions.push_back(Sorter<TestType> {"shell", shell_sort<TestType>});
     functions.push_back(Sorter<TestType> {"selection", selection_sort<TestType>});
     functions.push_back(Sorter<TestType> {"bubble", bubble_sort<TestType>});
     functions.push_back(Sorter<TestType> {"cocktail", cocktail_sort<TestType>});

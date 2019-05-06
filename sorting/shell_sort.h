@@ -2,23 +2,45 @@
 #define SHELL_SORT_H
 
 #include <vector>
-#include <iterator> // for std::distance
+#include <algorithm>
+#include <cmath>
 
-// this algorithm is a translation of 
-// https://en.wikipedia.org/wiki/Shellsort#Pseudocode
-template <typename Iter>
-void shell_sort(Iter first, Iter last) {
-    std::vector<int> gaps = {701, 301, 132, 57, 23, 10, 4, 1};
+typedef unsigned int uint;
+
+namespace {
+    // generate gaps < n as the sequence:
+    //      4^k + 3 * 2^(k-1) + 1
+    std::vector<uint> sedgewick_gaps(uint n) {
+        std::vector<uint> gaps{1};
+
+        int k = 1;
+        uint gap;
+        do {
+            gap = pow(4, k) + (3 * pow(2, k-1)) + 1;
+            gaps.push_back(gap);
+            k++;
+        } while(gap < n);
+
+        return gaps;
+    }
+}
+
+template <typename T>
+void shell_sort(std::vector<T>& vec) {
+    std::vector<uint> gaps = sedgewick_gaps(vec.size());
+
+    for (auto val : gaps) {
+        std::cout << val << ", ";
+    }
+    std::cout << std::endl;
 
     for (auto gap : gaps) {
-        for (Iter i = first + gap; i < last; i++) {
-
-            int temp = *i;
-            Iter j = i;
-            for (; j >= first+gap && *(j-gap) > temp; j -= gap) {
-                *j = *(j-gap);
+        for (uint i = gap; i < vec.size(); i++) {
+            uint j = i;
+            while (j >= gap && vec[j] < vec[j-gap]) {
+                std::swap(vec[j], vec[j-1]);
+                j -= gap;
             }
-            *j = temp;
         }
     }
 }
