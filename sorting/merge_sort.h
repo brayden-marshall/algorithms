@@ -2,48 +2,61 @@
 #define MERGE_SORT_H
 
 #include <vector>
+#include <iostream>
+#include "../tests/common.h"
 
-// helper functions that the user does not need to access
-namespace detail {
-    template <typename Iter>
-    std::vector<typename Iter::value_type> merge(const Iter start, const Iter mid, const Iter end) {
-        std::vector<typename Iter::value_type> vec;
-        vec.reserve(std::distance(start, end));
-        auto left = start;
-        auto right = mid;
-        while (left != mid && right != end) {
-            // push to the vector whichever value is smallest
-            vec.push_back(*left < *right ? *left++ : *right++);
+namespace {
+    template <typename T>
+    void merge(std::vector<T>& vec, int low, int mid, int hi) {
+        std::vector<T> result;
+        result.reserve(hi-low);
+
+        int i = low;
+        int j = mid;
+
+        while (i < mid && j < hi) {
+            if (vec[i] < vec[j]) {
+                result.push_back(vec[i]);
+                i++;
+            } else {
+                result.push_back(vec[j]);
+                j++;
+            }
         }
 
-        while(left < mid) {
-            vec.push_back(*left);  
-            left++;
+        while (i < mid) {
+            result.push_back(vec[i]);
+            i++;
         }
 
-        while (right < end) {
-            vec.push_back(*right);
-            right++;
+        while (j < hi) {
+            result.push_back(vec[j]);
+            j++;
         }
 
-        return vec;
+        // copy the sorted result into the original vector
+        for (int i = low, j = 0; i < hi; i++, j++) {
+            vec[i] = result[j];
+        }
+    }
+
+    template <typename T>
+    void _merge_sort(std::vector<T>& vec, int low, int hi) {
+        if (hi - low < 2) {
+            return;
+        }
+
+        int mid = (hi + low) / 2;
+        _merge_sort(vec, low, mid);
+        _merge_sort(vec, mid, hi);
+
+        merge(vec, low, mid, hi);
     }
 }
 
-template <typename Iter>
-void merge_sort(Iter first, Iter last) {
-    auto size = std::distance(first, last);
-    if (size < 2) {
-        return;
-    }
-    
-    // recursive call on left and right sections of the collection
-    auto mid = std::next(first, size / 2);
-    merge_sort(first, mid);
-    merge_sort(mid, last);
-
-    auto v = detail::merge(first, mid, last);
-    std::move(v.cbegin(), v.cend(), first);
+template <typename T>
+void merge_sort(std::vector<T>& vec) {
+    _merge_sort(vec, 0, vec.size());
 }
 
 #endif
