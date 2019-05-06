@@ -28,6 +28,7 @@ TEMPLATE_TEST_CASE("Testing Sorting Functions", "[sorting][vector]", int) {
     rand();
 
     std::vector<Sorter<TestType>> functions;
+    // "slow" sorts
     functions.push_back(Sorter<TestType> {"insertion", insertion_sort<TestType>});
     functions.push_back(Sorter<TestType> {"shell", shell_sort<TestType>});
     functions.push_back(Sorter<TestType> {"selection", selection_sort<TestType>});
@@ -36,6 +37,9 @@ TEMPLATE_TEST_CASE("Testing Sorting Functions", "[sorting][vector]", int) {
     functions.push_back(Sorter<TestType> {"comb", comb_sort<TestType>});
     functions.push_back(Sorter<TestType> {"gnome", gnome_sort<TestType>});
     functions.push_back(Sorter<TestType> {"odd_even", odd_even_sort<TestType>});
+    functions.push_back(Sorter<TestType> {"cycle", cycle_sort<TestType>});
+
+    // "fast" sorts
     functions.push_back(Sorter<TestType> {"quick", quick_sort<TestType>});
     functions.push_back(Sorter<TestType> {"merge", merge_sort<TestType>});
     functions.push_back(Sorter<TestType> {"heap", heap_sort<TestType>});

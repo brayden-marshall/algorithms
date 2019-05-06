@@ -139,4 +139,33 @@ void odd_even_sort(std::vector<T>& vec) {
     }
 }
 
+// Cycle sort
+template <typename T>
+void cycle_sort(std::vector<T>& vec) {
+
+    uint i = 0;
+    while (i < vec.size()) {
+
+        // determine the value's final position
+        uint final_position = 0;
+        for (uint j = 0; j < vec.size(); j++) {
+            if (vec[j] < vec[i]) {
+                final_position++;
+            }
+        }
+
+        // insert after any duplicates
+        while (i != final_position && vec[i] == vec[final_position]) {
+            final_position++;
+        }
+
+        // swap value into it's final position, or move to next value
+        if (final_position != i) {
+            std::swap(vec[i], vec[final_position]);
+        } else {
+            i++;
+        }
+    }
+}
+
 #endif
