@@ -34,6 +34,7 @@ TEMPLATE_TEST_CASE("Testing Sorting Functions", "[sorting][vector]", int) {
     functions.push_back(Sorter<TestType> {"comb", comb_sort<TestType>});
     functions.push_back(Sorter<TestType> {"gnome", gnome_sort<TestType>});
     functions.push_back(Sorter<TestType> {"odd_even", odd_even_sort<TestType>});
+    functions.push_back(Sorter<TestType> {"quick", quick_sort<TestType>});
 
     for (auto func : functions) {
         SECTION("Testing " + func.name + " sort function") {

@@ -1,65 +1,66 @@
 #ifndef QUICK_SORT_H
 #define QUICK_SORT_H
 
+#include <vector>
 #include <algorithm>
 #include <iostream>
 
-// helper functions that the user does not need to access
-namespace detail {
-    // gets the median of the first, last and middle elements
-    template <typename Iter>
-    Iter smart_pivot(Iter low, Iter hi) {
-        Iter mid = low + (hi - low) / 2;
-        if (*mid < *low) {
-            std::iter_swap(mid, low);
-        }
-        if (*hi < *low) {
-            std::iter_swap(hi, low);
+namespace {
+    template <typename T>
+    T smart_pivot(std::vector<T>& vec, int low, int hi) {
+        int mid = (low + hi) / 2;
+        if (vec[mid] < vec[low]) {
+            std::swap(vec[mid], vec[low]);
         }
 
-        if (*mid < *hi) {
-            std::iter_swap(hi, mid);
+        if (vec[hi] < vec[low]) {
+            std::swap(vec[low], vec[hi]);
         }
-        return hi;
+
+        if (vec[mid] < vec[hi]) {
+            std::swap(vec[mid], vec[hi]);
+        }
+        return vec[hi];
     }
 
-    template <typename Iter>
-    Iter partition(Iter low, Iter hi) {
-        auto pivot = *(smart_pivot(low, hi));
-        Iter i = low-1;
-        Iter j = hi+1;
-        while (i < j) {
+    template <typename T>
+    int partition(std::vector<T>& vec, int low, int hi) {
+        //auto pivot = vec[low + (hi - low) / 2];
+        auto pivot = smart_pivot(vec, low, hi);
+
+        int i = low-1;
+        int j = hi+1;
+
+        while(i < j) {
             do {
                 i++;
-            } while(*i < pivot);
+            } while(vec[i] < pivot);
 
             do {
                 j--;
-            } while(*j > pivot);
+            } while(vec[j] > pivot);
 
             if (i < j) {
-                std::iter_swap(i, j);
+                std::swap(vec[i], vec[j]);
             }
         }
+
         return j;
     }
 
-    template <typename Iter>
-    void _quick_sort(Iter first, Iter last) {
-        if (first < last) {
-            Iter p = partition(first, last);
-            _quick_sort(first, p);
-            _quick_sort(p + 1, last);
+    template <typename T>
+    void _quick_sort(std::vector<T>& vec, int low, int hi) {
+        if (low < hi) {
+            int p = partition(vec, low, hi);
+            _quick_sort(vec, low, p);
+            _quick_sort(vec, p+1, hi);
         }
     }
 }
 
-template <typename Iter>
-void quick_sort(Iter first, Iter last) {
-    if (first < last) {
-        last--;
-        detail::_quick_sort(first, last);
-    }
+template <typename T>
+void quick_sort(std::vector<T>& vec) {
+    _quick_sort(vec, 0, vec.size()-1);
 }
 
 #endif

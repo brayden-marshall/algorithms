@@ -52,13 +52,13 @@ void bubble_sort(std::vector<T>& vec) {
 template <typename T>
 void cocktail_sort(std::vector<T>& vec) {
     bool sorted = vec.size() <= 1;
-    uint lo = 0;
+    uint low = 0;
     uint hi = vec.size()-1;
     while (!sorted) {
         sorted = true;
 
         // bubble sort going up
-        for (uint i = lo; i < hi; i++) {
+        for (uint i = low; i < hi; i++) {
             if (vec[i] > vec[i+1]) {
                 std::swap(vec[i], vec[i+1]);
                 sorted = false;
@@ -71,13 +71,13 @@ void cocktail_sort(std::vector<T>& vec) {
         }
 
         // bubble sort going down
-        for (uint i = hi; i > lo; i--) {
+        for (uint i = hi; i > low; i--) {
             if (vec[i] < vec[i-1]) {
                 std::swap(vec[i], vec[i-1]);
                 sorted = false;
             }
         }
-        lo++;
+        low++;
     }
 }
 
